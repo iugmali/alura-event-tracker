@@ -1,0 +1,53 @@
+{
+  "eventos": [
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-01T09:00",
+      "fim": "2022-04-01T13:00",
+      "completo": true,
+      "id": 16423
+    },
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-15T09:00",
+      "fim": "2022-04-15T13:00",
+      "completo": false,
+      "id": 1642342747
+    },
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-09T09:00",
+      "fim": "2022-04-09T13:00",
+      "completo": false,
+      "id": 164234274
+    },
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-10T09:00",
+      "fim": "2022-04-10T13:00",
+      "completo": false,
+      "id": 164234
+    },
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-11T09:00",
+      "fim": "2022-04-11T13:00",
+      "completo": false,
+      "id": 164
+    },
+    {
+      "descricao": "Estudar React",
+      "inicio": "2022-04-12T09:00",
+      "fim": "2022-04-12T13:00",
+      "completo": false,
+      "id": 1642
+    },
+    {
+      "descricao": "Estudar Recoil",
+      "inicio": "2022-04-16T09:00",
+      "fim": "2022-04-16T11:00",
+      "completo": false,
+      "id": 1642342
+    }
+  ]
+}

@@ -1,10 +1,11 @@
-
 import React from 'react'
-import { IEvento } from '../../interfaces/IEvento';
 import style from './Calendario.module.scss';
 import ptBR from './localizacao/ptBR.json'
-import Kalend, { CalendarView } from 'kalend'
+import Kalend, { CalendarEvent, CalendarView, OnEventDragFinish } from 'kalend'
 import 'kalend/dist/styles/index.css';
+import { useRecoilValue } from 'recoil';
+import { listaDeEventosState } from '../../state/atom';
+import useAtualizarEvento from '../../state/hooks/useAtualizarEvento';
 
 interface IKalendEvento {
   id?: number
@@ -14,9 +15,11 @@ interface IKalendEvento {
   color: string
 }
 
-const Calendario: React.FC<{ eventos: IEvento[] }> = ({ eventos }) => {
+const Calendario: React.FC = () => {
 
   const eventosKalend = new Map<string, IKalendEvento[]>();
+  const eventos = useRecoilValue(listaDeEventosState);
+  const atualizarEvento = useAtualizarEvento()
 
   eventos.forEach(evento => {
     const chave = evento.inicio.toISOString().slice(0, 10)
@@ -31,6 +34,23 @@ const Calendario: React.FC<{ eventos: IEvento[] }> = ({ eventos }) => {
       color: 'blue'
     })
   })
+
+  const onEventDragFinish: OnEventDragFinish = (
+    kalendEventoInalterado: CalendarEvent,
+    kalendEventoAtualizado: CalendarEvent
+  ) => {
+    const evento = eventos.find(evento => evento.descricao === kalendEventoAtualizado.summary)
+    if (evento) {
+      const eventoAtualizado = {
+        ...evento
+      }
+      eventoAtualizado.inicio = new Date(kalendEventoAtualizado.startAt)
+      eventoAtualizado.fim = new Date(kalendEventoAtualizado.endAt)
+      atualizarEvento(eventoAtualizado)
+    }
+
+  };
+
   return (
     <div className={style.Container}>
       <Kalend
@@ -43,9 +63,10 @@ const Calendario: React.FC<{ eventos: IEvento[] }> = ({ eventos }) => {
         calendarIDsHidden={['work']}
         language={'customLanguage'}
         customLanguage={ptBR}
+        onEventDragFinish={onEventDragFinish}
       />
     </div>
   );
 }
 
-export default Calendario
+export default Calendario;
